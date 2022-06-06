@@ -63,16 +63,15 @@ pip install -v -e .  # or "python setup.py develop"
     load_from='pretrained_models/coco_train_minus_refer/fcos_r101.pth' #pretrained_models
     ```
 ## Train  
+
+Assume that you are under the root directory of this project, and you have activated your virtual environment if needed, and with RefCoco dataset in 'data/RefCoco/'.
 ```
-# assume that you are under the root directory of this project,
-# and you have activated your virtual environment if needed.
-# and with RefCoco dataset in 'data/RefCoco/'.
-##refcoco using plain concatenatation to fuse visual features and language features based on FCOS-R101 detectors.
+#refcoco using plain concatenatation to fuse visual features and language features based on FCOS-R101 detectors.
 ./tools/dist_train.sh configs/referring_grounding/refcoco/fcos_r101_concat_refcoco.py 8 
 
 ```
 ```
-##refcoco using dynamic filters to fuse visual features and language features based on FCOS-R101 detectors.
+#refcoco using dynamic filters to fuse visual features and language features based on FCOS-R101 detectors.
 ./tools/dist_train.sh configs/referring_grounding/refcoco/fcos_r101_dynamic_refcoco.py 8 
 ```
 
