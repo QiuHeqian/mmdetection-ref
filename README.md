@@ -14,19 +14,18 @@ MMDetection-Ref is an open-source referring grounding toobox based on [MMDetecti
 * PyTorch 1.3+
 * CUDA 9.2+ (If you build PyTorch from source, CUDA 9.0 is also compatible)
 * GCC 5+
-* Please see [get_started.md](https://github.com/QiuHeqian/mmdetection-ref/blob/master/docs/get_started.md) for installation and the basic usage of MMDetection-Ref.
 
-1. Clone the repository and then install it: 
-``` 
-git clone https://github.com/QiuHeqian/mmdetection-ref.git
-cd mmdetection-ref  
-pip install -v -e .  # or "python setup.py develop"  
-```
+1. Please see [get_started.md](https://github.com/QiuHeqian/mmdetection-ref/blob/master/docs/get_started.md) for installation and the basic usage of MMDetection-Ref.
+
 2. Clone the repository and then install it: 
 ``` 
 git clone https://github.com/QiuHeqian/mmdetection-ref.git
 cd mmdetection-ref  
 pip install -v -e .  # or "python setup.py develop"  
+```
+3. Download  and place them in ./data/refer. Available at [Gdrive], [One Drive] .
+``` 
+
 ```
 
 ## Train  
