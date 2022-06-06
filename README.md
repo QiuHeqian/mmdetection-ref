@@ -7,8 +7,13 @@
 MMDetection-Ref is an open-source referring grounding toobox based on [MMDetection](https://github.com/open-mmlab/mmdetection), which ﬂexibly supports the integration of natural language and various visual detectors for end-to-end referring expression comprehension task.
 
 ## Installation
+* Linux or macOS (Windows is in experimental support)
 * MMDetection
 * pytorch
+* Python 3.6+
+* PyTorch 1.3+
+* CUDA 9.2+ (If you build PyTorch from source, CUDA 9.0 is also compatible)
+* GCC 5+
 * Please see [get_started.md](https://github.com/QiuHeqian/mmdetection-ref/blob/master/docs/get_started.md) for installation and the basic usage of MMDetection-Ref.
 
 1. Clone the repository and then install it: 
@@ -17,8 +22,13 @@ git clone https://github.com/QiuHeqian/mmdetection-ref.git
 cd mmdetection-ref  
 pip install -v -e .  # or "python setup.py develop"  
 ```
+2. Clone the repository and then install it: 
+``` 
+git clone https://github.com/QiuHeqian/mmdetection-ref.git
+cd mmdetection-ref  
+pip install -v -e .  # or "python setup.py develop"  
+```
 
-## Data
 ## Train  
 ```
 # assume that you are under the root directory of this project,
