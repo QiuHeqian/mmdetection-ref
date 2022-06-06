@@ -1,0 +1,302 @@
+2021-10-14 16:30:19,966 - mmdet - INFO - Environment info:
+------------------------------------------------------------
+sys.platform: linux
+Python: 3.7.10 (default, Jun  4 2021, 14:48:32) [GCC 7.5.0]
+CUDA available: True
+GPU 0,1,2,3,4,5,6,7: GeForce RTX 3090
+CUDA_HOME: /usr/local/cuda-11.1
+NVCC: Build cuda_11.1.TC455_06.29069683_0
+GCC: gcc (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609
+PyTorch: 1.7.0
+PyTorch compiling details: PyTorch built with:
+  - GCC 7.3
+  - C++ Version: 201402
+  - Intel(R) oneAPI Math Kernel Library Version 2021.3-Product Build 20210617 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v1.6.0 (Git Hash 5ef631a030a6f73131c77892041042805a06064f)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - CUDA Runtime 11.0
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 8.0.3
+  - Magma 2.5.2
+  - Build settings: BLAS=MKL, BUILD_TYPE=Release, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DUSE_VULKAN_WRAPPER -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-result -Wno-unused-local-typedefs -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, USE_CUDA=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, 
+
+TorchVision: 0.8.0
+OpenCV: 4.5.3
+MMCV: 1.3.9
+MMCV Compiler: GCC 7.3
+MMCV CUDA Compiler: 11.0
+MMDetection: 2.17.0+
+------------------------------------------------------------
+
+2021-10-14 16:30:20,892 - mmdet - INFO - Distributed training: False
+2021-10-14 16:30:21,748 - mmdet - INFO - Config:
+model = dict(
+    type='FCOS',
+    backbone=dict(
+        type='ResNet',
+        depth=101,
+        num_stages=4,
+        out_indices=(0, 1, 2, 3),
+        frozen_stages=1,
+        norm_cfg=dict(type='BN', requires_grad=False),
+        norm_eval=True,
+        style='caffe',
+        init_cfg=dict(
+            type='Pretrained',
+            checkpoint='open-mmlab://detectron/resnet101_caffe')),
+    neck=dict(
+        type='FPN',
+        in_channels=[256, 512, 1024, 2048],
+        out_channels=256,
+        start_level=1,
+        add_extra_convs='on_output',
+        num_outs=5,
+        relu_before_extra_convs=True),
+    bbox_head=dict(
+        type='FCOSHead',
+        num_classes=1,
+        in_channels=256,
+        stacked_convs=4,
+        feat_channels=256,
+        strides=[8, 16, 32, 64, 128],
+        loss_cls=dict(
+            type='FocalLoss',
+            use_sigmoid=True,
+            gamma=2.0,
+            alpha=0.25,
+            loss_weight=1.0),
+        loss_bbox=dict(type='IoULoss', loss_weight=1.0),
+        loss_centerness=dict(
+            type='CrossEntropyLoss', use_sigmoid=True, loss_weight=1.0)),
+    train_cfg=dict(
+        assigner=dict(
+            type='MaxIoUAssigner',
+            pos_iou_thr=0.5,
+            neg_iou_thr=0.4,
+            min_pos_iou=0,
+            ignore_iof_thr=-1),
+        allowed_border=-1,
+        pos_weight=-1,
+        debug=False),
+    test_cfg=dict(
+        nms_pre=1000,
+        min_bbox_size=0,
+        score_thr=0.05,
+        nms=dict(type='nms', iou_threshold=0.5),
+        max_per_img=100))
+dataset_type = 'RefCrowdDataset'
+data_root = '/data1/QiuHeqian/refcrowdhuman_qhq/refcrowd_dataset/'
+img_norm_cfg = dict(
+    mean=[102.9801, 115.9465, 122.7717], std=[1.0, 1.0, 1.0], to_rgb=False)
+train_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(type='LoadAnnotations', with_bbox=True),
+    dict(type='Resize', img_scale=(1333, 800), keep_ratio=True),
+    dict(type='RandomFlip', flip_ratio=0.0),
+    dict(
+        type='Normalize',
+        mean=[102.9801, 115.9465, 122.7717],
+        std=[1.0, 1.0, 1.0],
+        to_rgb=False),
+    dict(type='Pad', size_divisor=32),
+    dict(type='DefaultFormatBundle'),
+    dict(
+        type='Collect',
+        keys=[
+            'img', 'gt_bboxes', 'gt_labels', 'refer_labels', 'att_labels',
+            'att_label_weights'
+        ])
+]
+test_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(
+        type='MultiScaleFlipAug',
+        img_scale=(1333, 800),
+        flip=False,
+        transforms=[
+            dict(type='Resize', keep_ratio=True),
+            dict(type='RandomFlip'),
+            dict(
+                type='Normalize',
+                mean=[102.9801, 115.9465, 122.7717],
+                std=[1.0, 1.0, 1.0],
+                to_rgb=False),
+            dict(type='Pad', size_divisor=32),
+            dict(type='ImageToTensor', keys=['img']),
+            dict(type='Collect', keys=['img', 'refer_labels'])
+        ])
+]
+data = dict(
+    samples_per_gpu=2,
+    workers_per_gpu=2,
+    train=dict(
+        type='RefCrowdDataset',
+        ann_file=[
+            '/data1/QiuHeqian/refcrowdhuman_qhq/refcrowd_dataset/annotations/1011_json/refcrowdhuman2021_qhq_train_1011_h5id.json'
+        ],
+        img_prefix=
+        '/data1/QiuHeqian/refcrowdhuman_qhq/refcrowd_dataset/crowdhuman2021/',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(type='LoadAnnotations', with_bbox=True),
+            dict(type='Resize', img_scale=(1333, 800), keep_ratio=True),
+            dict(type='RandomFlip', flip_ratio=0.0),
+            dict(
+                type='Normalize',
+                mean=[102.9801, 115.9465, 122.7717],
+                std=[1.0, 1.0, 1.0],
+                to_rgb=False),
+            dict(type='Pad', size_divisor=32),
+            dict(type='DefaultFormatBundle'),
+            dict(
+                type='Collect',
+                keys=[
+                    'img', 'gt_bboxes', 'gt_labels', 'refer_labels',
+                    'att_labels', 'att_label_weights'
+                ])
+        ]),
+    val=dict(
+        type='RefCrowdDataset',
+        ann_file=[
+            '/data1/QiuHeqian/refcrowdhuman_qhq/refcrowd_dataset/annotations/1011_json/refcrowdhuman2021_qhq_val_1011_h5id.json'
+        ],
+        img_prefix=
+        '/data1/QiuHeqian/refcrowdhuman_qhq/refcrowd_dataset/crowdhuman2021/',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(
+                type='MultiScaleFlipAug',
+                img_scale=(1333, 800),
+                flip=False,
+                transforms=[
+                    dict(type='Resize', keep_ratio=True),
+                    dict(type='RandomFlip'),
+                    dict(
+                        type='Normalize',
+                        mean=[102.9801, 115.9465, 122.7717],
+                        std=[1.0, 1.0, 1.0],
+                        to_rgb=False),
+                    dict(type='Pad', size_divisor=32),
+                    dict(type='ImageToTensor', keys=['img']),
+                    dict(type='Collect', keys=['img', 'refer_labels'])
+                ])
+        ]),
+    test=dict(
+        type='RefCrowdDataset',
+        ann_file=
+        '/data1/QiuHeqian/refcrowdhuman_qhq/refcrowd_dataset/annotations/1011_json/refcrowdhuman2021_qhq_val_1011_h5id.json',
+        img_prefix=
+        '/data1/QiuHeqian/refcrowdhuman_qhq/refcrowd_dataset/crowdhuman2021/',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(
+                type='MultiScaleFlipAug',
+                img_scale=(1333, 800),
+                flip=False,
+                transforms=[
+                    dict(type='Resize', keep_ratio=True),
+                    dict(type='RandomFlip'),
+                    dict(
+                        type='Normalize',
+                        mean=[102.9801, 115.9465, 122.7717],
+                        std=[1.0, 1.0, 1.0],
+                        to_rgb=False),
+                    dict(type='Pad', size_divisor=32),
+                    dict(type='ImageToTensor', keys=['img']),
+                    dict(type='Collect', keys=['img', 'refer_labels'])
+                ])
+        ]))
+evaluation = dict(interval=1, metric='Top1Acc')
+optimizer = dict(
+    type='SGD',
+    lr=0.002,
+    momentum=0.9,
+    weight_decay=0.0001,
+    paramwise_cfg=dict(
+        bias_lr_mult=2.0,
+        bias_decay_mult=0.0,
+        custom_keys=dict(
+            dynamic_fcs=dict(lr_mult=10.0, decay_mult=1.0),
+            rnn_encoder=dict(lr_mult=10.0, decay_mult=1.0),
+            contra=dict(lr_mult=10.0, decay_mult=1.0),
+            lang=dict(lr_mult=10.0, decay_mult=1.0),
+            vis=dict(lr_mult=10.0, decay_mult=1.0),
+            word=dict(lr_mult=10.0, decay_mult=1.0))))
+optimizer_config = dict(grad_clip=None)
+lr_config = dict(
+    policy='step',
+    warmup='linear',
+    warmup_iters=500,
+    warmup_ratio=0.3333333333333333,
+    step=[8, 11])
+runner = dict(type='EpochBasedRunner', max_epochs=12)
+checkpoint_config = dict(interval=1)
+log_config = dict(interval=50, hooks=[dict(type='TextLoggerHook')])
+custom_hooks = [dict(type='NumClassCheckHook')]
+dist_params = dict(backend='nccl')
+log_level = 'INFO'
+resume_from = None
+workflow = [('train', 1)]
+load_from = '/data1/QiuHeqian/refcrowdhuman_qhq/mmdetection-refcrowd-cvpr/pretrained_models/fcos_r101_caffe_fpn_gn-head_mstrain_640-800_2x_coco-511424d6.pth'
+work_dir = './work_dirs/fcos_r101_v1'
+gpu_ids = range(0, 1)
+
+2021-10-14 16:30:29,381 - mmdet - INFO - load checkpoint from /data1/QiuHeqian/refcrowdhuman_qhq/mmdetection-refcrowd-cvpr/pretrained_models/fcos_r101_caffe_fpn_gn-head_mstrain_640-800_2x_coco-511424d6.pth
+2021-10-14 16:30:29,381 - mmdet - INFO - Use load_from_local loader
+2021-10-14 16:30:30,031 - mmdet - WARNING - The model and loaded state dict do not match exactly
+
+size mismatch for bbox_head.conv_cls.weight: copying a param with shape torch.Size([80, 256, 3, 3]) from checkpoint, the shape in current model is torch.Size([1, 256, 3, 3]).
+size mismatch for bbox_head.conv_cls.bias: copying a param with shape torch.Size([80]) from checkpoint, the shape in current model is torch.Size([1]).
+missing keys in source state_dict: rnn_encoder.embedding.weight, rnn_encoder.mlp.0.weight, rnn_encoder.mlp.0.bias, rnn_encoder.rnn.weight_ih_l0, rnn_encoder.rnn.weight_hh_l0, rnn_encoder.rnn.bias_ih_l0, rnn_encoder.rnn.bias_hh_l0, rnn_encoder.rnn.weight_ih_l0_reverse, rnn_encoder.rnn.weight_hh_l0_reverse, rnn_encoder.rnn.bias_ih_l0_reverse, rnn_encoder.rnn.bias_hh_l0_reverse, crowd_dynamic_fcs_spa.0.weight, crowd_dynamic_fcs_spa.0.bias, crowd_dynamic_fcs_spa.1.weight, crowd_dynamic_fcs_spa.1.bias, crowd_dynamic_fcs_spa.2.weight, crowd_dynamic_fcs_spa.2.bias, crowd_dynamic_fcs_spa.3.weight, crowd_dynamic_fcs_spa.3.bias, crowd_dynamic_fcs_spa.4.weight, crowd_dynamic_fcs_spa.4.bias
+
+2021-10-14 16:30:30,036 - mmdet - INFO - Start running, host: amax@amax, work_dir: /data1/QiuHeqian/refcrowdhuman_qhq/mmdetection-master/tools/work_dirs/fcos_r101_v1
+2021-10-14 16:30:30,037 - mmdet - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) StepLrUpdaterHook                  
+(NORMAL      ) CheckpointHook                     
+(LOW         ) EvalHook                           
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) StepLrUpdaterHook                  
+(NORMAL      ) NumClassCheckHook                  
+(LOW         ) IterTimerHook                      
+(LOW         ) EvalHook                           
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) StepLrUpdaterHook                  
+(LOW         ) IterTimerHook                      
+(LOW         ) EvalHook                           
+ -------------------- 
+after_train_iter:
+(ABOVE_NORMAL) OptimizerHook                      
+(NORMAL      ) CheckpointHook                     
+(LOW         ) IterTimerHook                      
+(LOW         ) EvalHook                           
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) CheckpointHook                     
+(LOW         ) EvalHook                           
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_val_epoch:
+(NORMAL      ) NumClassCheckHook                  
+(LOW         ) IterTimerHook                      
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+before_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(LOW         ) IterTimerHook                      
+ -------------------- 
+after_val_epoch:
+(VERY_LOW    ) TextLoggerHook                     
+ -------------------- 
+2021-10-14 16:30:30,037 - mmdet - INFO - workflow: [('train', 1)], max: 12 epochs
+2021-10-14 16:31:05,312 - mmdet - INFO - Epoch [1][50/25530]	lr: 7.973e-03, eta: 2 days, 12:01:02, time: 0.705, data_time: 0.051, memory: 4983, loss_cls: 0.6211, loss_bbox: 0.2951, loss_centerness: 0.5969, loss: 1.5131
+2021-10-14 16:31:38,449 - mmdet - INFO - Epoch [1][100/25530]	lr: 9.307e-03, eta: 2 days, 10:11:34, time: 0.663, data_time: 0.006, memory: 4983, loss_cls: 0.4452, loss_bbox: 0.3141, loss_centerness: 0.5974, loss: 1.3567
