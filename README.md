@@ -6,7 +6,7 @@ MMDetection-Ref is an open-source referring grounding toobox based on [MMDetecti
 ## Installation
 * MMDetection
 * pytorch
-* Please see [get_started.md]([https://github.com/QiuHeqian/CrossDet/blob/master/docs/get_started.md](https://github.com/QiuHeqian/mmdetection-ref/blob/master/docs/get_started.md)) for installation and the basic usage of MMDetection-Ref.
+* Please see [get_started.md](https://github.com/QiuHeqian/mmdetection-ref/blob/master/docs/get_started.md) for installation and the basic usage of MMDetection-Ref.
 
 ```
 # Clone the repository and then install it:  
