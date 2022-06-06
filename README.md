@@ -57,7 +57,7 @@ mmdetection-ref
 ```
 5. Pretrain Models: download the [pretrained models](https://drive.google.com/drive/u/0/folders/1uAxYujoKWIDngG5VpNzpKlb5KJTuzBdw) and place the file in 'pretrained_models/'. You can get two types of pretrained models: [coco_train](https://drive.google.com/drive/u/0/folders/1uAxYujoKWIDngG5VpNzpKlb5KJTuzBdw) indicates models are trained using all COCO training data, [coco_train_minus_refer](https://drive.google.com/drive/u/0/folders/1uAxYujoKWIDngG5VpNzpKlb5KJTuzBdw) indicates models are trained excluding COCO training data in RefCOCO, RefCOCO+, and RefCOCOg’s validation+testing.
 
-You can modify resume_from in corresponding config file to change the pretrained models.
+   You can modify resume_from in corresponding config file to change the pretrained models.
 ```
 # assume that you want to use the config file 'configs/referring_grounding/refcoco/fcos_r101_refcoco.py', you can change:
 load_from='pretrained_models/coco_train_minus_refer/fcos_r101.pth' #pretrained_models
