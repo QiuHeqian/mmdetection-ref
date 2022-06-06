@@ -24,7 +24,7 @@ cd mmdetection-ref
 pip install -v -e .  # or "python setup.py develop"  
 ```
 3. Download the RefCoco dataset and place them in data/RefCoco. Available at [Gdrive](https://drive.google.com/drive/u/0/folders/16VnoB4Ja5kilp2XeLxNL0dAikNQdL7Ge).
-4. If you want to download [RefCrowd dataset](https://qiuheqian.github.io/datasets/refcrowd/) for grounding person in crowd, you requires to sign [RefCrowd Terms of Use] (https://docs.google.com/forms/d/e/1FAIpQLSeWgI0mzT1OFrhEthLZLURvuC-he_Hy882nEnCzhiM6DAoFEg/viewform?usp=sf_link) dataset as restrictions on access to dataset to privacy protection and use dataset for non-commercial research and/or educational purposes. After downloading RefCrowd dataset, please place them in data/RefCrowd.
+4. If you want to download [RefCrowd dataset](https://qiuheqian.github.io/datasets/refcrowd/) for grounding person in crowd, you requires to sign [RefCrowd Terms of Use](https://docs.google.com/forms/d/e/1FAIpQLSeWgI0mzT1OFrhEthLZLURvuC-he_Hy882nEnCzhiM6DAoFEg/viewform?usp=sf_link) as restrictions on access to dataset to privacy protection and use dataset for non-commercial research and/or educational purposes. After downloading RefCrowd dataset, please place them in data/RefCrowd.
 5. 
 ``` 
 
