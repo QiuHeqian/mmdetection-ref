@@ -1,10 +1,10 @@
 # MMDetection-Ref
-
-## Introduction  
-MMDetection-Ref is an open-source referring grounding toobox based on [MMDetection](https://github.com/open-mmlab/mmdetection), which ﬂexibly supports the integration of natural language and various visual detectors for end-to-end referring expression comprehension task.
 <div align="center">
   <img src="resources/mmdetection-ref_framework.png" width="600"/>
 </div>
+## Introduction  
+MMDetection-Ref is an open-source referring grounding toobox based on [MMDetection](https://github.com/open-mmlab/mmdetection), which ﬂexibly supports the integration of natural language and various visual detectors for end-to-end referring expression comprehension task.
+
 ## Installation
 * MMDetection
 * pytorch
