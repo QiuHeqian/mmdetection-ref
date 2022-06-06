@@ -1,6 +1,6 @@
 # MMDetection-Ref: An Open-Source Referring Grounding Toolbox
 <div align="center">
-  <img src="resources/mmdetection-ref_framework.png" width="600"/>
+  <img src="resources/mmdetection-ref_framework.png" width="700"/>
 </div>
 
 ## Introduction  
