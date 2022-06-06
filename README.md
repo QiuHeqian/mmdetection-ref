@@ -8,15 +8,14 @@ MMDetection-Ref is an open-source referring grounding toobox based on [MMDetecti
 * pytorch
 * Please see [get_started.md](https://github.com/QiuHeqian/mmdetection-ref/blob/master/docs/get_started.md) for installation and the basic usage of MMDetection-Ref.
 
-```
-# Clone the repository and then install it:  
-git clone https://github.com/QiuHeqian/CrossDet.git  
-cd CrossDet  
+1. Clone the repository and then install it: 
+``` 
+git clone https://github.com/QiuHeqian/mmdetection-ref.git
+cd mmdetection-ref  
 pip install -v -e .  # or "python setup.py develop"  
-# install ivipcv libaray
-cd ivipcv  
-python setup.py develop
 ```
+
+## Data
 ## Train  
 ```
 # assume that you are under the root directory of this project,
