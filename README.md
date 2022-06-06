@@ -57,39 +57,63 @@ pip install -v -e .  # or "python setup.py develop"
     ```
 5. Pretrain Models: download the [pretrained models](https://drive.google.com/drive/u/0/folders/1uAxYujoKWIDngG5VpNzpKlb5KJTuzBdw) and place the file in 'pretrained_models/'. You can get two types of pretrained models: [coco_train](https://drive.google.com/drive/u/0/folders/1uAxYujoKWIDngG5VpNzpKlb5KJTuzBdw) indicates models are trained using all COCO training data, [coco_train_minus_refer](https://drive.google.com/drive/u/0/folders/1uAxYujoKWIDngG5VpNzpKlb5KJTuzBdw) indicates models are trained excluding COCO training data in RefCOCO, RefCOCO+, and RefCOCOg’s validation+testing.
 
-   You can modify resume_from in corresponding config file to change the pretrained models.
+   You can modify load_from in corresponding config file to change the pretrained models.
     ```
     # assume that you want to use the config file 'configs/referring_grounding/refcoco/fcos_r101_concat_refcoco.py', you can change:
     load_from='pretrained_models/coco_train_minus_refer/fcos_r101.pth' #pretrained_models
     ```
 ## Train  
 
-Assume that you are under the root directory of this project, and you have activated your virtual environment if needed, and with RefCoco dataset in 'data/RefCoco/'.
+Assume that you are under the root directory of this project, and you have activated your virtual environment if needed, and with refcoco dataset in 'data/RefCoco/refcoco'. Here, we use 8GPUs.
 ```
-#refcoco using plain concatenatation to fuse visual features and language features based on FCOS-R101 detectors.
+#refcoco using plain concatenatation to fuse visual features and language features 
+#based on FCOS-R101 detectors.
 ./tools/dist_train.sh configs/referring_grounding/refcoco/fcos_r101_concat_refcoco.py 8 
 
 ```
 ```
-#refcoco using dynamic filters to fuse visual features and language features based on FCOS-R101 detectors.
+#refcoco using dynamic filters to fuse visual features and language features 
+#based on FCOS-R101 detectors.
 ./tools/dist_train.sh configs/referring_grounding/refcoco/fcos_r101_dynamic_refcoco.py 8 
 ```
 
 ## Inference
+If you want to evaluate the split set in refcoco, you can modify the test in corresponding config file to change the evaluation dataset.
 ```
-./tools/dist_test.sh configs/crossdet/crossdet_r50_fpn_1x_coco.py work_dirs/crossdet_r50_fpn_1x_coco/epoch_12.pth 8 --eval bbox
+test=dict(
+        type=dataset_type,
+        ann_file=data_root+'refcoco/val.json', #val.json, testA.json, testB.json
+        img_prefix=data_root + 'train2014/', #val imageset, testA imageset, testB imageset, 
+        pipeline=test_pipeline))
 ```
+Then, you can use the following script for inference using Top1Acc metric.
+```
+#refcoco using dynamic filters to fuse visual features and language features 
+#based on FCOS-R101 detectors.
+./tools/dist_test.sh configs/referring_grounding/refcoco/fcos_r101_concat_refcoco.py work_dirs/fcos_r101_concat_refcoco/epoch_12.pth 8 --eval Top1Acc
+```
+Training and inference for other datasets in different config files are similar to the above description.
+
+## Performance and Trained Models
+The performance and trained models will be released soon, please wait...
 ## Acknowledgement
 Thanks MMDetection team for the wonderful open source project!
 
 ## Citition
-If you find CrossDet useful in your research, please consider citing:  
+If you find the mmdetection-ref toolbox useful in your research, please consider citing:  
 ```
-@inproceedings{qiu2021crossdet,  
-  title={CrossDet: Crossline Representation for Object Detection},  
-  author={Qiu, Heqian and Li, Hongliang and Wu, Qingbo and Cui, Jianhua and Song, Zichen and Wang, Lanxiao and Zhang, Minjian},  
-  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},  
-  pages={3195--3204},  
-  year={2021}  
+@inproceedings{qiu2020language,
+  title={Language-aware fine-grained object representation for referring expression comprehension},
+  author={Qiu, Heqian and Li, Hongliang and Wu, Qingbo and Meng, Fanman and Shi, Hengcan and Zhao, Taijin and Ngan, King Ngi},
+  booktitle={Proceedings of the 28th ACM International Conference on Multimedia},
+  pages={4171--4180},
+  year={2020}
+}
+or
+@article{qiu2022refcrowd,  
+  title={RefCrowd: Grounding the Target in Crowd with Referring Expressions},  
+  author={Qiu, Heqian and Li, Hongliang and Zhao, Taijing and Wang, Lanxiao and Wu, Qingbo and Meng, Fanman},  
+  booktitle={arXiv preprint arXiv: xxx},  
+  year={2022}  
 }  
 ```
