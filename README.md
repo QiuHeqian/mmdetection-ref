@@ -1,4 +1,4 @@
-# MMDetection-Ref
+# MMDetection-Ref: An Open-Source Referring Grounding Toobox
 <div align="center">
   <img src="resources/mmdetection-ref_framework.png" width="600"/>
 </div>
