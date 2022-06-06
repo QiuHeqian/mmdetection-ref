@@ -59,21 +59,21 @@ pip install -v -e .  # or "python setup.py develop"
 
    You can modify resume_from in corresponding config file to change the pretrained models.
     ```
-    # assume that you want to use the config file 'configs/referring_grounding/refcoco/fcos_r101_refcoco.py', you can change:
+    # assume that you want to use the config file 'configs/referring_grounding/refcoco/fcos_r101_concat_refcoco.py', you can change:
     load_from='pretrained_models/coco_train_minus_refer/fcos_r101.pth' #pretrained_models
     ```
 ## Train  
 ```
 # assume that you are under the root directory of this project,
 # and you have activated your virtual environment if needed.
-# and with COCO dataset in 'data/dataset/coco/'.
-./tools/dist_train.sh configs/crossdet/crossdet_r50_fpn_1x_coco.py 8
+# and with RefCoco dataset in 'data/RefCoco/'.
+##refcoco using plain concatenatation to fuse visual features and language features based on FCOS-R101 detectors.
+./tools/dist_train.sh configs/referring_grounding/refcoco/fcos_r101_concat_refcoco.py 8 
+
 ```
 ```
-# assume that you are under the root directory of this project,
-# and you have activated your virtual environment if needed.
-# and with VOC dataset in 'data/dataset/VOCdevkit/'.
-./tools/dist_train.sh configs/crossdet/crossdet_r50_fpn_1x_voc.py 8
+##refcoco using dynamic filters to fuse visual features and language features based on FCOS-R101 detectors.
+./tools/dist_train.sh configs/referring_grounding/refcoco/fcos_r101_dynamic_refcoco.py 8 
 ```
 
 ## Inference
