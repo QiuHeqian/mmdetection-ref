@@ -206,7 +206,7 @@ class RefCocoDataset(CustomDataset):
 
         for idx in range(len(self)):
             sent_id = str(self.sent_infos[idx]['sent_id'])
-            bbox=self.Sentences[sent_id]['region']
+            bbox=self.Sentences[sent_id]['bbox']
             gt_bbox = xywh_to_xyxy(np.vstack([bbox]))
             image_id=self.Sentences[sent_id]['image_id']
             file_name = self.Images[image_id]['file_name']
