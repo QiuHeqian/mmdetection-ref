@@ -14,6 +14,8 @@ MMDetection-Ref is an open-source referring grounding toolbox based on [MMDetect
 * PyTorch 1.3+
 * CUDA 9.2+ (If you build PyTorch from source, CUDA 9.0 is also compatible)
 * GCC 5+
+* h5py
+* spacy
 
 1. Please see [get_started.md](https://github.com/QiuHeqian/mmdetection-ref/blob/master/docs/get_started.md) for installation and the basic usage of MMDetection-Ref.
 
@@ -23,7 +25,7 @@ git clone https://github.com/QiuHeqian/mmdetection-ref.git
 cd mmdetection-ref  
 pip install -v -e .  # or "python setup.py develop"  
 ```
-3. Download the [RefCoco annotations](https://drive.google.com/drive/u/0/folders/16VnoB4Ja5kilp2XeLxNL0dAikNQdL7Ge) and the images ([train2014 of MS-COCO dataset](http://images.cocodataset.org/zips/train2014.zip)), please place them in 'data/RefCoco'.
+3. Download the [RefCoco annotations](https://drive.google.com/file/d/19pY_Ks48FNflXp2zt-9jQRLiYn5oFMj8/view?usp=sharing) and the images ([train2014 of MS-COCO dataset](http://images.cocodataset.org/zips/train2014.zip)), please place them in 'data/RefCoco'.
 4. If you want to download [RefCrowd dataset](https://qiuheqian.github.io/datasets/refcrowd/) for grounding person in crowd, you requires to sign [RefCrowd Terms of Use](https://docs.google.com/forms/d/e/1FAIpQLSeWgI0mzT1OFrhEthLZLURvuC-he_Hy882nEnCzhiM6DAoFEg/viewform?usp=sf_link) as restrictions on access to dataset to privacy protection and use dataset for non-commercial research and/or educational purposes. After downloading RefCrowd dataset, please place them in 'data/RefCrowd'.
     ```
     mmdetection-ref
