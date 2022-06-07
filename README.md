@@ -57,7 +57,7 @@ pip install -v -e .  # or "python setup.py develop"
     │   │   │   ├── test
 
     ```
-5. Pretrain Models: download the [pretrained models](https://drive.google.com/drive/u/0/folders/1uAxYujoKWIDngG5VpNzpKlb5KJTuzBdw) and place the file in 'pretrained_models/'. You can get two types of pretrained models: [coco_train](https://drive.google.com/drive/u/0/folders/1uAxYujoKWIDngG5VpNzpKlb5KJTuzBdw) indicates models are trained using all COCO training data, [coco_train_minus_refer](https://drive.google.com/drive/u/0/folders/1uAxYujoKWIDngG5VpNzpKlb5KJTuzBdw) indicates models are trained excluding COCO training data in RefCOCO, RefCOCO+, and RefCOCOg’s validation+testing.
+5. Pretrain Models: download the [pretrained models](https://drive.google.com/drive/folders/1uAxYujoKWIDngG5VpNzpKlb5KJTuzBdw?usp=sharing) and place the file in 'pretrained_models/'. You can get two types of pretrained models: [coco_train](https://drive.google.com/file/d/1ie3Y4zznidCzbTYmtz4QUK0dY9cwHthx/view?usp=sharing) indicates models are trained using all COCO training data, [coco_train_minus_refer](https://drive.google.com/file/d/1FZEm9F0zSzjewGzr64sEFP6mPEgRxUCN/view?usp=sharing) indicates models are trained excluding COCO training data in RefCOCO, RefCOCO+, and RefCOCOg’s validation+testing.
 
    You can modify load_from in corresponding config file to change the pretrained models.
     ```
