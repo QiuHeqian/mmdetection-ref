@@ -112,10 +112,10 @@ If you find the mmdetection-ref toolbox useful in your research, please consider
   year={2020}
 }
 or
-@article{qiu2022refcrowd,  
-  title={RefCrowd: Grounding the Target in Crowd with Referring Expressions},  
-  author={Qiu, Heqian and Li, Hongliang and Zhao, Taijing and Wang, Lanxiao and Wu, Qingbo and Meng, Fanman},  
-  booktitle={arXiv preprint arXiv: xxx},  
-  year={2022}  
-}  
+@article{qiu2022refcrowd,
+  title={RefCrowd: Grounding the Target in Crowd with Referring Expressions},
+  author={Qiu, Heqian and Li, Hongliang and Zhao, Taijin and Wang, Lanxiao and Wu, Qingbo and Meng, Fanman},
+  journal={arXiv preprint arXiv:2206.08172},
+  year={2022}
+}
 ```
