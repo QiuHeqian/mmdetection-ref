@@ -111,7 +111,6 @@ If you find the mmdetection-ref toolbox useful in your research, please consider
   pages={4171--4180},
   year={2020}
 }
-or
 @article{qiu2022refcrowd,
   title={RefCrowd: Grounding the Target in Crowd with Referring Expressions},
   author={Qiu, Heqian and Li, Hongliang and Zhao, Taijin and Wang, Lanxiao and Wu, Qingbo and Meng, Fanman},
